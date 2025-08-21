@@ -4,34 +4,11 @@
   <meta charset="UTF-8">
   <title>Modelos</title>
   <link rel="stylesheet" href="static/css/style.css">
-  <style>
-    .modelo img {
-      width: 200px;
-      margin: 10px;
-      cursor: zoom-in;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.8);
-    }
-    .modal img {
-      display: block;
-      max-width: 90%;
-      max-height: 90%;
-      margin: 5% auto;
-      cursor: zoom-out;
-    }
-  </style>
+  https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap
 </head>
 <body>
   <h1 id="titulo-modelos">Modelos</h1>
-  <div class="categoria" id="modelos-container"></div>
+  <div class="container" id="modelos-container"></div>
 
   <div id="imageModal" class="modal">
     <span class="close" onclick="closeModal()">&times;</span>
@@ -45,8 +22,7 @@
 
     document.getElementById('titulo-modelos').innerText = `Modelos - ${time} / ${categoria}`;
 
-    // Lista de modelos (você pode tornar isso dinâmico futuramente)
-    const modelos = ['Modelo1', 'Modelo2', 'Modelo3']; // Adicione conforme necessário
+    const modelos = ['Modelo1', 'Modelo2', 'Modelo3'];
 
     const container = document.getElementById('modelos-container');
 
@@ -54,17 +30,17 @@
       const frente = `static/Camisas/img/${time}/${categoria}/${modelo}/frente.jpg`;
       const costas = `static/Camisas/img/${time}/${categoria}/${modelo}/costas.jpg`;
 
-      const divModelo = document.createElement('div');
-      divModelo.className = 'modelo';
+      const card = document.createElement('div');
+      card.className = 'card-modelo';
 
-      divModelo.innerHTML = `
+      card.innerHTML = `
         <img src="${frente}" alt="frente" onclick="openModal('${frente}')">
-        <p>frente.jpg</p>
+        <h3>Frente</h3>
         <img src="${costas}" alt="costas" onclick="openModal('${costas}')">
-        <p>costas.jpg</p>
+        <h3>Costas</h3>
       `;
 
-      container.appendChild(divModelo);
+      container.appendChild(card);
     });
 
     function openModal(src) {
