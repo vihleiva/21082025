@@ -1,144 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalhes do Modelo</title>
+  <link rel="stylesheet" href="static/css/style.css">
+  https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap
+  <style>
+    body {
+      font-family: 'Bebas Neue', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
 
-body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-}
+    h1 {
+      text-align: center;
+      color: #0d47a1;
+      margin-bottom: 20px;
+    }
 
-h1 {
-  text-align: center;
-  margin-bottom: 30px;
-}
+    .galeria {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
 
-.times-container,
-.container,
-.categoria {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
+    .galeria-item {
+      border: 2px solid #1976d2;
+      border-radius: 10px;
+      padding: 10px;
+      background: linear-gradient(to bottom, #e3f2fd, #bbdefb);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+      width: 220px;
+      text-align: center;
+    }
 
-.time,
-.card,
-.categoria-card,
-.modelo {
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  width: 200px;
-}
+    .galeria-item:hover {
+      transform: scale(1.03);
+    }
 
-.time img,
-.card img,
-.categoria-card img,
-.modelo img {
-  width: 100%;
-  border-radius: 4px;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
+    .galeria-item img {
+      width: 100%;
+      border-radius: 5px;
+      cursor: zoom-in;
+    }
 
-.modelo img:hover,
-.modal-content:hover {
-  transform: scale(1.05);
-}
+    .legenda {
+      font-size: 16px;
+      color: #0d47a1;
+      margin-top: 8px;
+    }
 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  padding-top: 60px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.9);
-}
+    .voltar {
+      margin: 20px;
+      display: inline-block;
+      text-decoration: none;
+      background-color: #d32f2f;
+      padding: 10px 15px;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+    }
 
-.modal-content {
-  margin: auto;
-  display: block;
-  max-width: 90%;
-  max-height: 80%;
-}
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+    }
 
-.close {
-  position: absolute;
-  top: 30px;
-  right: 45px;
-  color: #fff;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
-}
+    .modal img {
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      margin: 5% auto;
+      cursor: zoom-out;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="titulo-detalhes">Detalhes do Modelo</h1>
+  <a id="link-voltar" class="voltar" href="#">← Voltar</a>
+  <div class="galeria" id="galeria-modelo"></div>
 
+  <div class="modal" id="modal">
+    <img id="modal-img" src="" alt="Imagem ampliada">
+  </div>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      console.log("Script carregado com sucesso");
 
-/* Botões estilizados para categorias */
-.botao-categoria {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  background-color: #d32f2f;
-  color: white;
-  border-radius: 10px;
-  padding: 15px;
-  width: 150px;
-  transition: transform 0.2s, background-color 0.3s;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
+      const urlParams = new URLSearchParams(window.location.search);
+      const time = urlParams.get('time');
+      const categoria = urlParams.get('categoria');
+      const modelo = urlParams.get('modelo');
 
-.botao-categoria:hover {
-  transform: scale(1.05);
-  background-color: #b71c1c;
-}
+      if (!time || !categoria || !modelo) {
+        document.body.innerHTML = "<h2 style='text-align:center;color:red;'>Erro: Parâmetros inválidos na URL.</h2>";
+        return;
+      }
 
-.botao-categoria img {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 10px;
-}
+      document.getElementById('titulo-detalhes').innerText = `Detalhes do modelo ${modelo} (${categoria} - ${time})`;
+      document.getElementById('link-voltar').href = `modelos.html?time=${time}&categoria=${categoria}`;
 
-.botao-categoria span {
-  font-weight: bold;
-  font-size: 16px;
-}
+      const galeria = document.getElementById('galeria-modelo');
+      const imagens = ['frente.jpg', 'costas.jpg'];
 
-/* Estilo esportivo para modelos */
-.card-modelo {
-  border: 2px solid #1976d2;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 15px;
-  background: linear-gradient(to bottom, #e3f2fd, #bbdefb);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  transition: transform 0.2s;
-  width: 200px;
-}
-
-.card-modelo:hover {
-  transform: scale(1.03);
-}
-
-.card-modelo img {
-  width: 100%;
-  border-radius: 5px;
-}
-
-.card-modelo h3 {
-  text-align: center;
-  font-size: 18px;
-  color: #0d47a1;
-  margin-top: 10px;
-}
-
-/* Fonte esportiva para títulos e botões */
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-
-h1, .botao-categoria span, .card-modelo h3 {
-  font-family: 'Bebas Neue', sans-serif;
-}
+      imagens.forEach(img => {
+        const caminho = `static/Camisas/img/${time}/${categoria}/${modelo}/${img}`;
