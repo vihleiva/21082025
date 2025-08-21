@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Categorias</title>
   <link rel="stylesheet" href="static/css/style.css">
+  https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap
 </head>
 <body>
   <h1 id="titulo-categorias">Categorias</h1>
@@ -13,14 +14,11 @@
   </div>
 
   <script>
-    // Captura o nome do time da URL
     const urlParams = new URLSearchParams(window.location.search);
     const nomeTime = urlParams.get('time');
 
-    // Atualiza o título da página
     document.getElementById('titulo-categorias').innerText = `Categorias para ${nomeTime}`;
 
-    // Lista de categorias
     const categorias = [
       { nome: 'Masculina', imagem: 'masculina.jpg' },
       { nome: 'Feminina', imagem: 'feminina.jpg' },
@@ -28,22 +26,19 @@
       { nome: 'Jogador', imagem: 'jogador.jpg' }
     ];
 
-    // Container onde as categorias serão exibidas
     const container = document.getElementById('categorias-container');
 
-    // Gera os cards dinamicamente
     categorias.forEach(categoria => {
-      const card = document.createElement('div');
-      card.className = 'card';
+      const link = document.createElement('a');
+      link.href = `modelos.html?time=${nomeTime}&categoria=${categoria.nome}`;
+      link.className = 'botao-categoria';
 
-      card.innerHTML = `
-        <a href="modelos.html?time=${nomeTime}&categoria=${categoria.nome}">
-          <img src="static/Camisas/img/categorias/${categoria.imagem}" alt="${categoria.nome}">
-          <h3>${categoria.nome}</h3>
-        </a>
+      link.innerHTML = `
+        <img src="static/Camisas/img/categorias/${categoria.imagem}" alt="${categoria.nome}">
+        <span>${categoria.nome}</span>
       `;
 
-      container.appendChild(card);
+      container.appendChild(link);
     });
   </script>
 </body>
