@@ -46,13 +46,13 @@
     document.getElementById('titulo-modelos').innerText = `Modelos - ${time} / ${categoria}`;
 
     // Lista de modelos (você pode tornar isso dinâmico futuramente)
-    const modelos = ['modelo1', 'modelo2', 'modelo3']; // Adicione conforme necessário
+    const modelos = ['Modelo1', 'Modelo2', 'Modelo3']; // Adicione conforme necessário
 
     const container = document.getElementById('modelos-container');
 
     modelos.forEach(modelo => {
-      const frente = `static/Camisas/${time}/${categoria}/${modelo}/frente.jpg`;
-      const costas = `static/Camisas/${time}/${categoria}/${modelo}/costas.jpg`;
+      const frente = `static/Camisas/img/${time}/${categoria}/${modelo}/frente.jpg`;
+      const costas = `static/Camisas/img/${time}/${categoria}/${modelo}/costas.jpg`;
 
       const divModelo = document.createElement('div');
       divModelo.className = 'modelo';
