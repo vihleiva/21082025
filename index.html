@@ -1,11 +1,64 @@
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang=
 <head>
   <meta charset="UTF-8">
   <title>Times</title>
   <link rel="stylesheet" href="static/css/style.css">
-  <link href="https://fonts.googleapis.com/css2?familydisplay=swap
+  https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap
+  <style>
+    body {
+      font-family: 'Bebas Neue', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #0d47a1;
+      margin-bottom: 30px;
+    }
+
+    .times-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .card-modelo {
+      border: 2px solid #1976d2;
+      border-radius: 10px;
+      padding: 15px;
+      background: linear-gradient(to bottom, #e3f2fd, #bbdefb);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 180px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .card-modelo:hover {
+      transform: scale(1.05);
+    }
+
+    .card-modelo img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .card-modelo h3 {
+      color: #0d47a1;
+      font-size: 18px;
+      margin: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
 </head>
 <body>
   <h1>Escolha um time</h1>
