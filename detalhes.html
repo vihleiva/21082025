@@ -1,17 +1,57 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <title>Detalhes do Modelo</title>
   <link rel="stylesheet" href="static/css/style.css">
-  <style>
-    .galeria img {
-      width: 200px;
-      margin: 10px;
-      cursor: zoom-in;
-      border: 2px solid #ccc;
-      border-radius: 5px;
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="eria {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
     }
+
+    .galeria-item {
+      border: 2px solid #1976d2;
+      border-radius: 10px;
+      padding: 10px;
+      background: linear-gradient(to bottom, #e3f2fd, #bbdefb);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+      width: 220px;
+      text-align: center;
+    }
+
+    .galeria-item:hover {
+      transform: scale(1.03);
+    }
+
+    .galeria-item img {
+      width: 100%;
+      border-radius: 5px;
+      cursor: zoom-in;
+    }
+
+    .legenda {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      color: #0d47a1;
+      margin-top: 8px;
+    }
+
+    .voltar {
+      margin: 20px;
+      display: inline-block;
+      text-decoration: none;
+      background-color: #d32f2f;
+      padding: 10px 15px;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      font-family: 'Bebas Neue', sans-serif;
+    }
+
     .modal {
       display: none;
       position: fixed;
@@ -22,27 +62,13 @@
       height: 100%;
       background-color: rgba(0,0,0,0.8);
     }
+
     .modal img {
       display: block;
       max-width: 90%;
       max-height: 90%;
       margin: 5% auto;
       cursor: zoom-out;
-    }
-    .legenda {
-      text-align: center;
-      font-size: 14px;
-      color: #333;
-    }
-    .voltar {
-      margin: 20px;
-      display: inline-block;
-      text-decoration: none;
-      background-color: #eee;
-      padding: 10px 15px;
-      border-radius: 5px;
-      color: #333;
-      font-weight: bold;
     }
   </style>
 </head>
@@ -65,22 +91,23 @@
     document.getElementById('link-voltar').href = `modelos.html?time=${time}&categoria=${categoria}`;
 
     const galeria = document.getElementById('galeria-modelo');
-    const imagens = ['frente.jpg', 'costas.jpg']; // Adicione conforme necessário
+    const imagens = ['frente.jpg', 'costas.jpg'];
 
     imagens.forEach(img => {
       const caminho = `static/Camisas/img/${time}/${categoria}/${modelo}/${img}`;
+      const container = document.createElement('div');
+      container.className = 'galeria-item';
+
       const imagem = document.createElement('img');
       imagem.src = caminho;
       imagem.alt = img;
       imagem.onclick = () => abrirModal(caminho);
 
-      const container = document.createElement('div');
-      container.appendChild(imagem);
-
       const legenda = document.createElement('div');
       legenda.className = 'legenda';
       legenda.innerText = img;
 
+      container.appendChild(imagem);
       container.appendChild(legenda);
       galeria.appendChild(container);
     });
