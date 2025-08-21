@@ -4,12 +4,93 @@
   <meta charset="UTF-8">
   <title>Modelos</title>
   <link rel="stylesheet" href="static/css/style.css">
+  https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap
+  <style>
+    body {
+      font-family: 'Bebas Neue', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #0d47a1;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .card-modelo {
+      border: 2px solid #1976d2;
+      border-radius: 10px;
+      padding: 15px;
+      background: linear-gradient(to bottom, #e3f2fd, #bbdefb);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 220px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .card-modelo:hover {
+      transform: scale(1.05);
+    }
+
+    .card-modelo img {
+      width: 100%;
+      border-radius: 5px;
+      cursor: zoom-in;
+      margin-bottom: 10px;
+    }
+
+    .card-modelo h3 {
+      color: #0d47a1;
+      font-size: 16px;
+      margin: 0 0 10px 0;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .modal-content {
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      margin: 5% auto;
+      cursor: zoom-out;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <h1 id="titulo-modelos">Modelos</h1>
+  <div class="container" id="modelos-container"></div>
 
-  <div class="container" id="modelos-container">
-    <!-- Os modelos serão inseridos aqui via JavaScript -->
+  <div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
   </div>
 
   <script>
@@ -17,24 +98,37 @@
     const time = urlParams.get('time');
     const categoria = urlParams.get('categoria');
 
-    document.getElementById('titulo-modelos').innerText = `Modelos ${categoria} do ${time}`;
+    document.getElementById('titulo-modelos').innerText = `Modelos - ${time} / ${categoria}`;
 
     const modelos = ['Modelo1', 'Modelo2', 'Modelo3'];
     const container = document.getElementById('modelos-container');
 
     modelos.forEach(modelo => {
+      const frente = `static/Camisas/img/${time}/${categoria}/${modelo}/frente.jpg`;
+      const costas = `static/Camisas/img/${time}/${categoria}/${modelo}/costas.jpg`;
+
       const card = document.createElement('div');
-      card.className = 'card';
+      card.className = 'card-modelo';
 
       card.innerHTML = `
-        <a href="detalhes.html?time=${time}&categoria=${categoria}&modelo=${modelo}">
-          <img src="static/Camisas/img/${time}/${categoria}/${modelo}/frente.jpg" alt="${modelo}">
-          <h3>${modelo}</h3>
-        </a>
+        <img src="${frente}" alt="Frente" onclick="openModal('${frente}')">
+        <h3>${modelo} - Frente</h3>
+        <img src="${costas}" alt="Costas" onclick="openModal('${costas}')">
+        <h3>${modelo} - Costas</h3>
+        <a href="detalhes.html?time=${time}&categoria=${categoria}&modelo=${modelo}" style="display:block;margin-top:10px;color:#d32f2f;font-weight:bold;">Ver detalhes</a>
       `;
 
       container.appendChild(card);
     });
+
+    function openModal(src) {
+      document.getElementById("imageModal").style.display = "block";
+      document.getElementById("modalImage").src = src;
+    }
+
+    function closeModal() {
+      document.getElementById("imageModal").style.display = "none";
+    }
   </script>
 </body>
 </html>
