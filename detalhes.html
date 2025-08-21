@@ -119,15 +119,16 @@
         const imagem = document.createElement('img');
         imagem.src = caminho;
         imagem.alt = img;
-        imagem.onerror = () => {
-          legenda.innerText = `Imagem não encontrada: ${img}`;
-          imagem.style.display = 'none';
-        };
         imagem.onclick = () => abrirModal(caminho);
 
         const legenda = document.createElement('div');
         legenda.className = 'legenda';
         legenda.innerText = img;
+
+        imagem.onerror = () => {
+          legenda.innerText = `Imagem não encontrada: ${img}`;
+          imagem.style.display = 'none';
+        };
 
         container.appendChild(imagem);
         container.appendChild(legenda);
